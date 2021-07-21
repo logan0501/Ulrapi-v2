@@ -43,7 +43,14 @@ function addVendor(event){
     if(name && phonenumber.length==10){
         const allvendars = {"name":name,"phonenumber":phonenumber};
         var db = firebase.firestore();
-
+        var storage = firebase.storage();
+        var storageref = storage.ref();
+        var imageref = storageref.child("/VendorImages/"+phonenumber+".jpg");
+        imageref.put(file).then((snapshot)=>{
+            console.log("uploaded"+snapshot);
+        }).catch((err)=>{
+            console.log("error");
+        })
         db.collection("AllVendors").doc(phonenumber).set(allvendars)
         .then(() => {
             console.log("Document successfully written!");
@@ -62,5 +69,5 @@ function addVendor(event){
 
 addvendorbtn.addEventListener('click',addVendor);
 fileipt.addEventListener('change',(e)=>{
-    file = r.target.files[0];
+    file = e.target.files[0];
 })
