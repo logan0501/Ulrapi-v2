@@ -53,15 +53,19 @@ j++;
     console.log(venders);
   });
 
-  const adduser = async() => {
-    var username = document.getElementById("vendor-name").value;
-    var phonenumber = document.getElementById("vendor-number").value;
-    if (phonenumber.length != 10) {
-      alert("phone number is not valid");
-    } else {
-      await database
-        .collection("AllVendors")
-        .add({ "name": username, "phone": phonenumber });
-    }
+  const addvendor= async() => {
+    // // var firestore=firebase.storage();
+    // var storageRef = firebase.storage().ref();
+    // var mountainsRef = storageRef.child(document.getElementById("vendor-image").value);
+    console.log(document.getElementById("vendor-image").value);
+    // var username = document.getElementById("vendor-name").value;
+    // var phonenumber = document.getElementById("vendor-number").value;
+    // if (phonenumber.length != 10) {
+    //   alert("phone number is not valid");
+    // } else {
+    //   await database
+    //     .collection("AllVendors")
+    //     .add({ "name": username, "phone": phonenumber });
+    // }
   };
   
