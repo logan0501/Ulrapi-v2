@@ -63,20 +63,35 @@ const adduser = async () => {
   }
 };
 
+
+var category_image = document.getElementById("category-image");
+category_image.addEventListener('change',(e)=>{
+  cfile = e.target.files[0];
+})
+
+
+var subcategory_image = document.getElementById("subcategory-image");
+subcategory_image.addEventListener('change',(e)=>{
+  sfile = e.target.files[0];
+})
+
+
 const addcategory = async() => {
   var category = document.getElementById("category-1").value;
-  var category_image = document.getElementById("category-image").value;
   var subcategory = document.getElementById("subcategory-1").value;
-  var subcategory_image = document.getElementById("subcategory-image").value;
-  var catfile=await firebase
-  .storage()
-  .ref()
-  .child("CategoryImages")
-  .put(category_image);
-  var subcatfile=await firebase
-  .storage()
-  .ref()
-  .child("SubategoryImages")
-  .put(subcategory_image);
-  console.log(catfile,subcatfile);
+
+  var storage = firebase.storage();
+  var storageref = storage.ref();
+  var catimageref = storageref.child("/CategoryImages/"+category+".jpg");
+  catimageref.put(cfile).then((snapshot)=>{
+      console.log("uploaded");
+  }).catch((err)=>{
+      console.log("error");
+  })
+  var catimageref = storageref.child("/SubcategoryImages/"+subcategory+".jpg");
+  catimageref.put(sfile).then((snapshot)=>{
+      console.log("uploaded");
+  }).catch((err)=>{
+      console.log("error");
+  })
 };
