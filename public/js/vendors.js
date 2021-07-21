@@ -69,6 +69,7 @@ category_image.addEventListener('change',(e)=>{
   cfile = e.target.files[0];
 })
 
+<<<<<<< HEAD
 
 var subcategory_image = document.getElementById("subcategory-image");
 subcategory_image.addEventListener('change',(e)=>{
@@ -95,3 +96,21 @@ const addcategory = async() => {
       console.log("error");
   })
 };
+=======
+  const addvendor= async() => {
+    // // var firestore=firebase.storage();
+    // var storageRef = firebase.storage().ref();
+    // var mountainsRef = storageRef.child(document.getElementById("vendor-image").value);
+    console.log(document.getElementById("vendor-image").value);
+    // var username = document.getElementById("vendor-name").value;
+    // var phonenumber = document.getElementById("vendor-number").value;
+    // if (phonenumber.length != 10) {
+    //   alert("phone number is not valid");
+    // } else {
+    //   await database
+    //     .collection("AllVendors")
+    //     .add({ "name": username, "phone": phonenumber });
+    // }
+  };
+  
+>>>>>>> 84a59bf9820dd3e5994a0da3cbcf652b08d86834
