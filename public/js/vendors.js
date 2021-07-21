@@ -69,7 +69,6 @@ category_image.addEventListener('change',(e)=>{
   cfile = e.target.files[0];
 })
 
-<<<<<<< HEAD
 
 var subcategory_image = document.getElementById("subcategory-image");
 subcategory_image.addEventListener('change',(e)=>{
@@ -96,7 +95,6 @@ const addcategory = async() => {
       console.log("error");
   })
 };
-=======
   const addvendor= async() => {
     // // var firestore=firebase.storage();
     // var storageRef = firebase.storage().ref();
@@ -113,4 +111,3 @@ const addcategory = async() => {
     // }
   };
   
->>>>>>> 84a59bf9820dd3e5994a0da3cbcf652b08d86834

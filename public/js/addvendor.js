@@ -8,7 +8,7 @@ const fileipt = document.getElementById('vendor-image')
 const establishipt = document.getElementById('establishtype')
 const verfifycheck = document.querySelector('#verifycheck');
 const acceptordercheck = document.querySelector('#acceptordercheck')
-const categoryipt = document.getElementById('categorytype')
+const categoryipt = document.getElementById('category1')
 let file;
 let weekdays;
 
@@ -24,12 +24,13 @@ var firebaseConfig = {
     measurementId: "G-526L2MHW5X",
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+//   firebase.initializeApp(firebaseConfig);
 
 
 
 function addVendor(event){
     event.preventDefault();
+
     const name = nameipt.value;
     const phonenumber = phoneipt.value;
     const resname = restipt.value;
@@ -40,9 +41,14 @@ function addVendor(event){
     const verified = verfifycheck.checked;
     const acceptorder = acceptordercheck.checked;
     const category = categoryipt.value;
+    const subcategory=document.getElementById("subcategory1").value;
+    const item=document.getElementById("item1").value;
+    const subitem=document.getElementById("subitem1").value;
+    var db = firebase.firestore();
+    const 
     if(name && phonenumber.length==10){
         const allvendars = {"name":name,"phonenumber":phonenumber};
-        var db = firebase.firestore();
+        
         var storage = firebase.storage();
         var storageref = storage.ref();
         var imageref = storageref.child("/VendorImages/"+phonenumber+".jpg");
@@ -54,7 +60,13 @@ function addVendor(event){
         db.collection("AllVendors").doc(phonenumber).set(allvendars)
         .then(() => {
             console.log("Document successfully written!");
-            db.collection(category).doc(phonenumber).set({"name":category})
+            db.collection(category).doc(phonenumber).set({"name":category,"restaruntname":resname,
+            "location":location,
+            "address":address,
+              "verified":verified,
+            "workingdays":weekdays,
+        "vendorname":name,
+    "phonenumber":phonenumber  });
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
@@ -63,9 +75,14 @@ function addVendor(event){
     }else{
         alert("Enter proper values")
     }
+    await db.collection("AllCategories").doc(category).set({"name":category,"uid":phonenumber});
+    await db.collection(category).doc(phonenumber).set({"acceptingorders":acceptorder,})
+console.log(category,subcategory,item,subitem).then(()=>{
+    console.log("added successfully");
+})
     
-    console.log(acceptorder);
-}
+};
+
 
 addvendorbtn.addEventListener('click',addVendor);
 fileipt.addEventListener('change',(e)=>{
