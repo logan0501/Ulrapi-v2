@@ -12,56 +12,71 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.firestore();
 var category = database.collection("Categories");
-const venders=[];
-var categories = category
-  .get()
-  .then((snapshot) => {
-    snapshot.forEach((doc) => {
-const vendtable = document.querySelector("#vendors");
-var cat = doc.data().name;
-var j=1;
-        var vonde = database.collection(cat);
+const venders = [];
+var categories = category.get().then((snapshot) => {
+  snapshot.forEach((doc) => {
+    const vendtable = document.querySelector("#vendors");
+    var cat = doc.data().name;
+    var j = 1;
+    var vonde = database.collection(cat);
     var vondr = vonde.get().then((snapshot) => {
       snapshot.forEach((docc) => {
         venders.push(docc.data());
 
-vendtable.innerHTML +=
-  "<tr><td>" +
-  j +
-  "</td><td>" +
-  cat +
-  "</td><td>" +
-  docc.data().restaurantName +
-  "</td><td>" +
-  docc.data().ownerName +
-  "</td><td>" +
-  docc.data().restaurantContact +
-  "</td><td>" +
-  docc.data().place +
-  "</td><td>" +
-  docc.data().rating +
-  "</td><td>" +
-  docc.data().verified +
-  "</td><td></td></tr>";
-j++;
+        vendtable.innerHTML +=
+          "<tr><td>" +
+          j +
+          "</td><td>" +
+          cat +
+          "</td><td>" +
+          docc.data().restaurantName +
+          "</td><td>" +
+          docc.data().ownerName +
+          "</td><td>" +
+          docc.data().restaurantContact +
+          "</td><td>" +
+          docc.data().place +
+          "</td><td>" +
+          docc.data().rating +
+          "</td><td>" +
+          docc.data().verified +
+          "</td><td></td></tr>";
+        j++;
       });
     });
 
-      // custmlist.innerHTML +=
-      //   "<option value=" + doc.id + ">" + doc.data().name + "</option>";
-    });
-    console.log(venders);
+    // custmlist.innerHTML +=
+    //   "<option value=" + doc.id + ">" + doc.data().name + "</option>";
   });
+  console.log(venders);
+});
 
-  const adduser = async() => {
-    var username = document.getElementById("vendor-name").value;
-    var phonenumber = document.getElementById("vendor-number").value;
-    if (phonenumber.length != 10) {
-      alert("phone number is not valid");
-    } else {
-      await database
-        .collection("AllVendors")
-        .add({ "name": username, "phone": phonenumber });
-    }
-  };
-  
+const adduser = async () => {
+  var username = document.getElementById("vendor-name").value;
+  var phonenumber = document.getElementById("vendor-number").value;
+  if (phonenumber.length != 10) {
+    alert("phone number is not valid");
+  } else {
+    await database
+      .collection("AllVendors")
+      .add({ name: username, phone: phonenumber });
+  }
+};
+
+const addcategory = async() => {
+  var category = document.getElementById("category-1").value;
+  var category_image = document.getElementById("category-image").value;
+  var subcategory = document.getElementById("subcategory-1").value;
+  var subcategory_image = document.getElementById("subcategory-image").value;
+  var catfile=await firebase
+  .storage()
+  .ref()
+  .child("CategoryImages")
+  .put(category_image);
+  var subcatfile=await firebase
+  .storage()
+  .ref()
+  .child("SubategoryImages")
+  .put(subcategory_image);
+  console.log(catfile,subcatfile);
+};

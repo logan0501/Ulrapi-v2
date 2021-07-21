@@ -167,14 +167,14 @@
                                         <p class="card-text"></p>
                                     </div>
 
-                                    <form class="form" id="adddata">
+                                    
                                         <div class="form-body">
                                             <div class="col">
                                                 <div class="col-md-12 col-12">
                                                     <form>
                                                         <div class="form-group">
                                                          
-                                                          <input type="text" class="form-control" id="category" placeholder="Enter Category">
+                                                          <input type="text" class="form-control" id="category-1" placeholder="Enter Category">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="category-image">Choose picture</label>
@@ -182,7 +182,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                            
-                                                          <input type="text" class="form-control" id="subcategory" placeholder="Enter SubCategory">
+                                                          <input type="text" class="form-control" id="subcategory-1" placeholder="Enter SubCategory">
                                                         </div>
                                                         <div class="form-group" id="cr-suncat">
                                                             <label for="subcategory-image">Choose picture</label>
@@ -197,12 +197,12 @@
                                                 <button type="submit"  class="btn btn-primary mkl-5 mb-1" style="align-self: center;" onclick={addInput()}>Add Subcategory</button>
                                                </div>
                                                 <div class="col-12" style="display:flex;justify-content: center;">
-                                                    <button type="submit"  class="btn btn-primary mr-1 mb-1">Add</button>
+                                                    <button   class="btn btn-primary mr-1 mb-1" onclick={addcategory()}>Add</button>
                                                     <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                         </div>
                        
@@ -226,7 +226,7 @@
     </footer>
     <!-- END: Footer-->
 
-<script src="js/users.js"></script>
+<script src="js/vendors.js"></script>
     <!-- BEGIN: Vendor JS-->
     <script src="app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
