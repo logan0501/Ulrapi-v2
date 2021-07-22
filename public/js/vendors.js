@@ -63,6 +63,7 @@ const adduser = async () => {
   }
 };
 
+let cfile,sfile,sfile1;
 
 var category_image = document.getElementById("category-image");
 category_image.addEventListener('change',(e)=>{
@@ -75,25 +76,69 @@ subcategory_image.addEventListener('change',(e)=>{
   sfile = e.target.files[0];
 })
 
+var subcategory_image = document.getElementById("subcategory-image-2");
+subcategory_image.addEventListener('change',(e)=>{
+  sfile1 = e.target.files[0];
+})
+
 
 const addcategory = async() => {
   var category = document.getElementById("category-1").value;
   var subcategory = document.getElementById("subcategory-1").value;
-
+  var subcategory2 = document.getElementById("subcategory-2").value;
+  
   var storage = firebase.storage();
   var storageref = storage.ref();
   var catimageref = storageref.child("/CategoryImages/"+category+".jpg");
-  catimageref.put(cfile).then((snapshot)=>{
+  if(cfile){
+    catimageref.put(cfile).then((snapshot)=>{
       console.log("uploaded");
   }).catch((err)=>{
       console.log("error");
   })
+  }
+  
   var catimageref = storageref.child("/SubcategoryImages/"+subcategory+".jpg");
-  catimageref.put(sfile).then((snapshot)=>{
+  if(sfile){
+    catimageref.put(sfile).then((snapshot)=>{
       console.log("uploaded");
   }).catch((err)=>{
       console.log("error");
   })
+  
+  }
+ var catimageref = storageref.child("/SubcategoryImages/"+subcategory2+".jpg");
+ if(sfile1){
+  catimageref.put(sfile1).then((snapshot)=>{
+    console.log("uploaded");
+}).catch((err)=>{
+    console.log("error");
+})
+ }
+  
+  var database = firebase.firestore();
+  database.collection("AllCategories").doc(category).set({
+    "name":category
+  })
+  const documentid = database.collection(category).doc();
+  console.log(documentid.id);
+  database.collection(category).doc(documentid.id).collection("SubCategory").doc(subcategory).set({
+    "name":subcategory
+  }).then((data)=>{
+    console.log(data);
+  }).catch(err=>{
+    console.log(err);
+  });
+
+  if(subcategory2){
+    database.collection(category).doc(documentid.id).collection("SubCategory").doc(subcategory2).set({
+      "name":subcategory2
+    }).then((data)=>{
+      console.log(data);
+    }).catch(err=>{
+      console.log(err);
+    });
+  }
 };
   const addvendor= async() => {
     // // var firestore=firebase.storage();
