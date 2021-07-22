@@ -25,7 +25,27 @@ var firebaseConfig = {
         doc.data().name +
         "</td><td>" +
         doc.data().discount +
-        "</td><td>"+doc.data().minAmount+"</td><td>"+doc.data().type+"</td><</tr>";
+        "</td><td>"+doc.data().minAmount+"</td><td>"+doc.data().type+"</td></tr>";
+      j++;
+    });
+  });
+
+  var demens = database.collection("DE");
+  const detable = document.querySelector("#Deliverymen");
+  const de = [];
+  var j = 1;
+  var des = demens.get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      console.log(doc.data());
+      de.push(doc.data());
+      detable.innerHTML +=
+        "<tr><td>" +
+        j +
+        "</td><td><img src="+doc.data().userImage+" style='height:100px;width:auto;border-radius:100%'></td><td>" +
+        doc.data().name +
+        "</td><td>" +
+        doc.data().phoneNo +
+        "</td><td>"+doc.data().live+"</td><td>"+doc.data().currentOrderID+"</td><td>"+doc.data().address+"</td></tr>";
       j++;
     });
   });
